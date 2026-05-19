@@ -1,0 +1,4 @@
+/* App-level styles (component overrides go here; global tokens are in index.css) */
+
+/* Nothing needed yet — all styles in App.jsx use inline styles + index.css utilities.
+   This file is kept for Phase 2+ component-level CSS modules. */

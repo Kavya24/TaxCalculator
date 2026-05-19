@@ -1,0 +1,208 @@
+/* ── WizardPage ───────────────────────────────────────────── */
+
+.wiz-root {
+  min-height: calc(100vh - 64px);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* ── Top control bar (back + progress + start over) ───────── */
+.wiz-topbar {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 64px;   /* below site nav */
+  z-index: 50;
+  padding: var(--space-3) 0;
+}
+
+.wiz-topbar-inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.wiz-back-btn {
+  background: none;
+  border: none;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--neutral-600);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: color var(--transition-fast), background var(--transition-fast);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.wiz-back-btn:hover {
+  color: var(--primary);
+  background: var(--primary-light);
+}
+
+.wiz-progress-wrap {
+  /* the progress bar fills its own .pb-root */
+}
+
+.wiz-progress-wrap .pb-root {
+  /* override padding since topbar already has padding */
+  background: transparent;
+  border-bottom: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.wiz-startover-btn {
+  background: none;
+  border: none;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--neutral-400);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: color var(--transition-fast), background var(--transition-fast);
+  white-space: nowrap;
+}
+
+.wiz-startover-btn:hover {
+  color: var(--danger);
+  background: var(--danger-light);
+}
+
+/* ── Main body: 65/35 grid ────────────────────────────────── */
+.wiz-body {
+  display: grid;
+  grid-template-columns: var(--wizard-content-w) var(--wizard-preview-w);
+  gap: var(--space-8);
+  align-items: start;
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-16);
+  flex: 1;
+}
+
+/* Left: step content */
+.wiz-content {
+  min-height: 420px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Right: preview panel */
+.wiz-preview {
+  /* LivePreviewPanel handles its own sticky */
+}
+
+/* ── Slide animations ─────────────────────────────────────── */
+.wiz-step-wrap {
+  width: 100%;
+}
+
+/* Entry */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Exit */
+@keyframes slideOutLeft {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-32px); }
+}
+@keyframes slideOutRight {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(32px); }
+}
+
+.wizard-slide-in-right  { animation: slideInRight  200ms ease forwards; }
+.wizard-slide-in-left   { animation: slideInLeft   200ms ease forwards; }
+.wizard-slide-out-left  { animation: slideOutLeft  200ms ease forwards; }
+.wizard-slide-out-right { animation: slideOutRight 200ms ease forwards; }
+
+/* ── Start Over dialog ────────────────────────────────────── */
+.wiz-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: var(--space-6);
+  animation: fadeIn 150ms ease forwards;
+}
+
+.wiz-dialog {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-8);
+  max-width: 400px;
+  width: 100%;
+  animation: fadeIn 200ms ease forwards;
+}
+
+.wiz-dialog-title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--neutral-900);
+  margin-bottom: var(--space-3);
+}
+
+.wiz-dialog-body {
+  font-size: var(--text-base);
+  color: var(--neutral-600);
+  line-height: 1.6;
+  margin-bottom: var(--space-6);
+}
+
+.wiz-dialog-actions {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .wiz-body {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hide desktop preview panel on mobile */
+  .wiz-preview {
+    display: none;
+  }
+
+  /* Add padding at bottom for the mobile sticky bar */
+  .wiz-body {
+    padding-bottom: calc(var(--space-16) + 72px);
+  }
+}
+
+@media (max-width: 767px) {
+  .wiz-topbar-inner {
+    grid-template-columns: auto 1fr;
+  }
+
+  .wiz-startover-btn {
+    display: none;
+  }
+}

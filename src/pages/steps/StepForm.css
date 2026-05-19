@@ -1,0 +1,230 @@
+/* ── Step Form Shared Styles ──────────────────────────────── */
+
+.sf-root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  max-width: 520px;
+  width: 100%;
+}
+
+.sf-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.sf-step-label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+}
+
+.sf-title {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--neutral-900);
+}
+
+.sf-desc {
+  font-size: var(--text-base);
+  color: var(--neutral-500);
+  line-height: 1.6;
+}
+
+.sf-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ── Standard Inputs ──────────────────────────────────────── */
+
+.sf-input-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.sf-label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--neutral-700);
+}
+
+.sf-hint {
+  font-size: var(--text-xs);
+  color: var(--neutral-500);
+  line-height: 1.5;
+}
+
+.sf-input-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sf-input-icon {
+  position: absolute;
+  left: var(--space-4);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--neutral-400);
+  pointer-events: none;
+}
+
+.sf-input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-xl);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-base);
+  color: var(--neutral-900);
+  transition: all var(--transition-base);
+}
+
+.sf-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+.sf-input-icon-wrap .sf-input {
+  padding-left: calc(var(--space-8) + var(--space-2));
+}
+
+.sf-input--large {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  padding: var(--space-4);
+}
+
+.sf-input-icon-wrap .sf-input--large {
+  padding-left: calc(var(--space-10) + var(--space-2));
+}
+
+.sf-input-icon-wrap .sf-input--large ~ .sf-input-icon {
+  font-size: var(--text-2xl);
+  left: var(--space-5);
+}
+
+.sf-input--error {
+  border-color: #e11d48 !important;
+  box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.1) !important;
+}
+
+.sf-error-msg {
+  font-size: var(--text-xs);
+  color: #e11d48;
+  font-weight: 500;
+  margin-top: var(--space-1);
+}
+
+.sf-warning-msg {
+  font-size: var(--text-xs);
+  color: #b45309;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-lg);
+  margin-top: var(--space-2);
+}
+
+
+/* ── Radio Cards ──────────────────────────────────────────── */
+
+.sf-radio-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.sf-radio-card {
+  position: relative;
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.sf-radio-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.sf-radio-card:hover {
+  border-color: var(--neutral-400);
+  background: var(--neutral-50);
+}
+
+.sf-radio-card--active {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.sf-radio-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sf-radio-title {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--neutral-900);
+}
+
+.sf-radio-card--active .sf-radio-title {
+  color: var(--primary);
+}
+
+.sf-radio-desc {
+  font-size: var(--text-xs);
+  color: var(--neutral-500);
+}
+
+.sf-radio-card--active .sf-radio-desc {
+  color: var(--primary);
+  opacity: 0.8;
+}
+
+/* ── Conditional Card ─────────────────────────────────────── */
+.sf-sub-panel {
+  background: var(--neutral-50);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  animation: fadeIn 300ms ease forwards;
+}
+
+/* ── Navigation ───────────────────────────────────────────── */
+
+.sf-nav {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.sf-next-btn {
+  min-width: 140px;
+  font-size: var(--text-base) !important;
+  padding: var(--space-4) var(--space-8) !important;
+}
+
+.sf-back-btn {
+  min-width: 100px;
+}
